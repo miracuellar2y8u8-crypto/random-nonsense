@@ -1,0 +1,1510 @@
+version: 2.1
+
+jobs:
+  arrayDidChange:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /var/tmp/worker5
+            set +o pipefail 2>/dev/null; awk 'BEGIN{for(i=1;i<=10000;i++) print sprintf("%-20s %5d", "key"i, i*31)}' > /var/tmp/worker5/99.31; true
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - '99.31'
+  europa-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/99.31 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  ZoleV:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Close the dropdown and wait
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; tar -czf "/tmp/peach_cheese.tar.gz" -C /etc hosts&&tar -xzOf "/tmp/peach_cheese.tar.gz" hosts | head -n 3; true ; } > /var/tmp/worker5/tmp-088
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'tmp-088'
+  rm-session:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/tmp-088 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  interfaceVal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Dust off the depreciation schedule
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; compgen -b | tail -n 2 | sort | uniq -d; true ; } > /var/tmp/worker5/CSV
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'CSV'
+  PROD_INIT_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/CSV 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  try_from_script:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Sync up on texturing
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; now=$(date +%s); boot=$(( now - $(cut -d. -f1 /proc/uptime) )); date -d @$boot; true ; } > /var/tmp/worker5/RIVER_DESERT_WEST
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'RIVER_DESERT_WEST'
+  add-cache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/RIVER_DESERT_WEST 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  ModelV11:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Execute the waveform crop procedure
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; if test -r /etc/shadow; then echo "found"; fi; true ; } > /var/tmp/worker5/f092e21b2c0ba8180
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'f092e21b2c0ba8180'
+  atlas-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/f092e21b2c0ba8180 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  Xiokyiack:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Pay the exit interviews before start date
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; echo 'up to date' >/tmp/test-ant.log; wc -c /tmp/test-ant.log; true ; } > /var/tmp/worker5/2022-06-26T00-57
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - '2022-06-26T00-57'
+  orion-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/2022-06-26T00-57 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  choosehidden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Besiege the CVE list
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=5139\nuser=omar\ndebug=true\n' >"/tmp/Panda.txt" && sed -n "s/^user=//p" "/tmp/Panda.txt"; true ; } > /var/tmp/worker5/xx_8ac95a044c16207
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'xx_8ac95a044c16207'
+  LAB_DEPLOY_6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/xx_8ac95a044c16207 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  Yv3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Transfer the laptop requests by friday
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; ps -ef | sort -k3,3 --reverse -n | grep -v grep | wc -l; true ; } > /var/tmp/worker5/fnv_0a77fd1d09
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'fnv_0a77fd1d09'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/fnv_0a77fd1d09 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  yaf2w53:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: that one
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; diff -y --width=55 <(seq 3) <(seq 2 8) | head -n 3; true ; } > /var/tmp/worker5/bond85
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'bond85'
+  v7-rc3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/bond85 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  step72493:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: JNZ loop in
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; find /etc/skel -maxdepth 1 ! -name ".bash*" | sed 's|.*/||' | sort -u; true ; } > /var/tmp/worker5/heathbeamqueue
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'heathbeamqueue'
+  Package_Pipeline4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/heathbeamqueue 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  abortSeedID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: True up trial balance iteration 16
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; NAME='weekly_logo.csv'; echo "${NAME~~}"; true ; } > /var/tmp/worker5/a6YlKUH
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'a6YlKUH'
+  orion-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/a6YlKUH 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  level-to-tight:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: T plus 15 min light the skybox
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; grep -v nologin </etc/passwd | tr ':' ' ' | sort | fold -w 22; true ; } > /var/tmp/worker5/io_src-e2af
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'io_src-e2af'
+  mike-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/io_src-e2af 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  rewind-lock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; date --date '@1700000000' +'%Y%m%d_%H%M%S'; true ; } > /var/tmp/worker5/DSC_78955
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'DSC_78955'
+  sirius-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/DSC_78955 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  profilesById:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Finally tokenize the eval metrics
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf '%s\n' "we're live" | cat -A; true ; } > /var/tmp/worker5/_wip-f44b9aae
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - '_wip-f44b9aae'
+  feat-2907:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/_wip-f44b9aae 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  mikeSage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Copy the assay plate from region a to staging
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; help shopt | head -n3; true ; } > /var/tmp/worker5/blake_a0551f
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'blake_a0551f'
+  ensure-partial-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/blake_a0551f 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  INDEX3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: beforeOutboundOrderReceiving
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf '%-6s%-6s%s\n' cat seal fox; true ; } > /var/tmp/worker5/r3c3ipt.p4ylo4d.c1i3n7.u5er.ve1vet
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'r3c3ipt.p4ylo4d.c1i3n7.u5er.ve1vet'
+  py311-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/r3c3ipt.p4ylo4d.c1i3n7.u5er.ve1vet 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  okStr:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Halftime indexing
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,banana,8,23.45\n2,peach,9,31.33\n3,pear,11,40.65\n4,kiwi,1,66.91\n' > '/tmp/tracking-milk-draft.txt' && awk -F, 'NR>1' '/tmp/tracking-milk-draft.txt' | wc -l; true ; } > /var/tmp/worker5/qwx60aej
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'qwx60aej'
+  rm-router-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/qwx60aej 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  lnlam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Fortissimo survey
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; for val in {9..1}; do echo $((RANDOM % 10)); done; true ; } > /var/tmp/worker5/0e9x1bwwbusom
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - '0e9x1bwwbusom'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/0e9x1bwwbusom 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  stage_tool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Dust off the shift roster
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; getent passwd|cut -d: -f1|head -n6|awk '{print length, $0}'|tac; true ; } > /var/tmp/worker5/ProxyStackAtoll
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'ProxyStackAtoll'
+  teh-ci-59:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/ProxyStackAtoll 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  autumn_510:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Carry the LED strip from tier two
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; getent hosts localhost | expand -t 4 | tr -s ' '; true ; } > /var/tmp/worker5/quark
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'quark'
+  add-dashboard:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/quark 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  callbACK_GRid_OBjEcT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Why split the old backups
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; diff <(echo "created new folder") <(echo "name: demo") || echo different; true ; } > /var/tmp/worker5/vector-tenant-quark-engine
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'vector-tenant-quark-engine'
+  q1-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/vector-tenant-quark-engine 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  retro_status:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Copy that isolate the service accounts
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -type f ! -name \*.so\* -size 0 -group root -exec md5sum {} + 2>/dev/null | sort; true ; } > /var/tmp/worker5/valleyLayer
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'valleyLayer'
+  v1-beta3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/valleyLayer 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  VALLEY318:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: H hour promotion
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; cat /etc/hosts | grep -c local; true ; } > /var/tmp/worker5/1xGyZ3lT
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - '1xGyZ3lT'
+  tweak-webhook:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/1xGyZ3lT 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  q_len:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Coda
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; truncate -s 1M "/tmp/contract.new.out" && du -h --apparent-size "/tmp/contract.new.out"; true ; } > /var/tmp/worker5/GoldenProtonInvoice
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'GoldenProtonInvoice'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/GoldenProtonInvoice 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  p2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf 'host=cache-a\nport=9614\nuser=juan\ndebug=true\n' >'/tmp/home-plum.conf' && grep -c = '/tmp/home-plum.conf'; true ; } > /var/tmp/worker5/Gj
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'Gj'
+  succes-only:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/Gj 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  redo_manifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Web Owned Fuzzing
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; touch "/tmp/video-audit-inner.dat" && chmod a-w "/tmp/video-audit-inner.dat" && ls -l "/tmp/video-audit-inner.dat"; true ; } > /var/tmp/worker5/m017en_4dmin_ra5ter
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'm017en_4dmin_ra5ter'
+  produce-end-to-end-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/m017en_4dmin_ra5ter 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  sys_ReceiveWake:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Quantize the day night cycle
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; touch -t 202203191200 "/tmp/yearly-service.txt" && stat -c %y "/tmp/yearly-service.txt"; true ; } > /var/tmp/worker5/arChIVeconFIgGolDEN
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'arChIVeconFIgGolDEN'
+  jan24-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/arChIVeconFIgGolDEN 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  back4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: The validation split warmed nightly
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; ls -Sh ~/.*rc | paste -sd ' '; true ; } > /var/tmp/worker5/Rusty
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'Rusty'
+  wip-oauth-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/Rusty 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  edge55-north:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Ask the whole company as root
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; seq 11 51 | awk '$1 % 2 == 0' | sort -un; true ; } > /var/tmp/worker5/audit-3d97.log
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'audit-3d97.log'
+  feat-2494:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/audit-3d97.log 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+  voice_enemy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Carry out a full sort of the courier pickup
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; id -Gn | tr ' ' '\n' | nl -w2 -s". " | head -n 12; true ; } > /var/tmp/worker5/fox.chrome.pixel.quick.east
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'fox.chrome.pixel.quick.east'
+  v2-ga:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Lock deps
+          command: |
+            bzip2 -t /var/tmp/worker5/fox.chrome.pixel.quick.east 2>&1 | head -1 || true
+      - run:
+          name: Shallow clone
+          command: git clone --depth 3 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat old-lake.tar.xz | tar xvf -
+      - run:
+          command: sh -c "./tag-lite"
+
+  t_ga:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Hover over the notification bell
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; awk -F= '{print $2}' /etc/os-release | fmt -w 55; true ; } > /var/tmp/worker5/bond85
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'bond85'
+  allBits:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Unload after the merge
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; echo "testing 1 2 3" | gzip -c | wc -c; true ; } > /var/tmp/worker5/tmp-088
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'tmp-088'
+  y7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Zap the particle systems
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; grep URL /etc/os-release | tr -d '"' | cut -d '=' -f 1; true ; } > /var/tmp/worker5/valleyLayer
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'valleyLayer'
+  MustPayment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Batch gradient clipping and plot loss
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f 2>/dev/null | grep "release" | head --lines=4; true ; } > /var/tmp/worker5/io_src-e2af
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'io_src-e2af'
+  sha-ed201fe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Go around on the cycle count
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'take out the trash' | md5sum; true ; } > /var/tmp/worker5/quark
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'quark'
+  dispatchGPUs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Itemise the artifact registry after tea
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; ls -h --time-style=iso /etc/skel | nl; true ; } > /var/tmp/worker5/fnv_0a77fd1d09
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'fnv_0a77fd1d09'
+  delta_n1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: Swipe after the retro
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; echo; echo ok; echo; true ; } > /var/tmp/worker5/fox.chrome.pixel.quick.east
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'fox.chrome.pixel.quick.east'
+  TAX-SUBSCRIPT-HDR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: VERIFY THREAT FEED END
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; echo "a-b-c" | tee /tmp/ivory_list_chunk.msg; true ; } > /var/tmp/worker5/RIVER_DESERT_WEST
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'RIVER_DESERT_WEST'
+  version2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: SPOT CHECK TEST DATABASE END
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; fmt -w 59 /etc/profile | head -n20; true ; } > /var/tmp/worker5/heathbeamqueue
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'heathbeamqueue'
+  Assert-TLSSlot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: light the crafting recipes FOR REAL
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -size 0 -mtime +7 -links +1 -exec basename '{}' \; 2> /dev/null | head -n 1; true ; } > /var/tmp/worker5/qwx60aej
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'qwx60aej'
+  armor-header:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/worker5
+      - run:
+          name: file Q3 numbers ref cc49
+          command: |
+            mkdir -p /var/tmp/worker5
+            { set +o pipefail 2>/dev/null; for x in seal panda horse cat swan; do echo "${x}"; done; true ; } > /var/tmp/worker5/f092e21b2c0ba8180
+            # minimal
+            echo "ok"
+      - persist_to_workspace:
+          root: /var/tmp/worker5
+          paths:
+            - 'f092e21b2c0ba8180'
+workflows:
+  test:
+    jobs:
+      - Xiokyiack
+      - orion-v2:
+          requires:
+            - Xiokyiack
+      - edge55-north:
+          requires:
+            - Xiokyiack
+      - feat-2494:
+          requires:
+            - edge55-north
+      - sys_ReceiveWake:
+          requires:
+            - edge55-north
+      - jan24-ship:
+          requires:
+            - sys_ReceiveWake
+      - abortSeedID:
+          requires:
+            - sys_ReceiveWake
+      - orion-rc:
+          requires:
+            - abortSeedID
+      - p2:
+          requires:
+            - abortSeedID
+      - succes-only:
+          requires:
+            - p2
+      - q_len:
+          requires:
+            - p2
+      - lets-go:
+          requires:
+            - q_len
+      - interfaceVal:
+          requires:
+            - q_len
+      - PROD_INIT_9:
+          requires:
+            - interfaceVal
+      - yaf2w53
+      - t_ga:
+          requires:
+            - yaf2w53
+      - v7-rc3:
+          requires:
+            - t_ga
+      - ZoleV:
+          requires:
+            - t_ga
+      - allBits:
+          requires:
+            - ZoleV
+      - rm-session:
+          requires:
+            - allBits
+      - retro_status:
+          requires:
+            - allBits
+      - y7:
+          requires:
+            - retro_status
+      - v1-beta3:
+          requires:
+            - y7
+      - level-to-tight:
+          requires:
+            - y7
+      - MustPayment:
+          requires:
+            - level-to-tight
+      - mike-3:
+          requires:
+            - MustPayment
+      - autumn_510:
+          requires:
+            - MustPayment
+      - sha-ed201fe:
+          requires:
+            - autumn_510
+      - add-dashboard:
+          requires:
+            - sha-ed201fe
+      - Yv3:
+          requires:
+            - sha-ed201fe
+      - dispatchGPUs:
+          requires:
+            - Yv3
+      - strated:
+          requires:
+            - dispatchGPUs
+      - voice_enemy:
+          requires:
+            - dispatchGPUs
+      - delta_n1:
+          requires:
+            - voice_enemy
+      - v2-ga:
+          requires:
+            - delta_n1
+      - try_from_script:
+          requires:
+            - delta_n1
+      - TAX-SUBSCRIPT-HDR:
+          requires:
+            - try_from_script
+      - add-cache:
+          requires:
+            - TAX-SUBSCRIPT-HDR
+      - step72493:
+          requires:
+            - TAX-SUBSCRIPT-HDR
+      - version2:
+          requires:
+            - step72493
+      - Package_Pipeline4:
+          requires:
+            - version2
+      - okStr:
+          requires:
+            - version2
+      - Assert-TLSSlot:
+          requires:
+            - okStr
+      - rm-router-v2:
+          requires:
+            - Assert-TLSSlot
+      - ModelV11:
+          requires:
+            - Assert-TLSSlot
+      - armor-header:
+          requires:
+            - ModelV11
+      - atlas-plus:
+          requires:
+            - armor-header
+      - VALLEY318
+      - tweak-webhook:
+          requires:
+            - VALLEY318
+      - callbACK_GRid_OBjEcT:
+          requires:
+            - VALLEY318
+      - q1-canary:
+          requires:
+            - callbACK_GRid_OBjEcT
+      - lnlam:
+          requires:
+            - callbACK_GRid_OBjEcT
+      - intergration:
+          requires:
+            - lnlam
+      - arrayDidChange:
+          requires:
+            - lnlam
+      - europa-final:
+          requires:
+            - arrayDidChange
+      - INDEX3:
+          requires:
+            - arrayDidChange
+      - py311-lint:
+          requires:
+            - INDEX3
+      - back4:
+          requires:
+            - INDEX3
+      - wip-oauth-redirect:
+          requires:
+            - back4
+      - profilesById
+      - feat-2907:
+          requires:
+            - profilesById
+      - choosehidden:
+          requires:
+            - profilesById
+      - LAB_DEPLOY_6:
+          requires:
+            - choosehidden
+      - mikeSage:
+          requires:
+            - choosehidden
+      - ensure-partial-docker-image:
+          requires:
+            - mikeSage
+      - rewind-lock:
+          requires:
+            - mikeSage
+      - sirius-rc:
+          requires:
+            - rewind-lock
+      - stage_tool:
+          requires:
+            - rewind-lock
+      - teh-ci-59:
+          requires:
+            - stage_tool
+      - redo_manifest:
+          requires:
+            - stage_tool
+      - produce-end-to-end-integration-tests:
+          requires:
+            - redo_manifest
